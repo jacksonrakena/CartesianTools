@@ -3,3 +3,4 @@ obj/
 .idea/
 output.txt
 CartesianTools.sln.DotSettings.user
+.vs/
