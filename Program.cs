@@ -23,9 +23,10 @@ namespace CartesianTools
                 Renderer = new DefaultCartesianRenderer()
             });
 
-            plane.InsertPositions(CartesianPosition.CreateFunction(x => Math.Sqrt(x), plane));
+            plane.InsertPositions(CartesianPosition.CreateFunction(x => x^2, plane));
             Console.WriteLine(string.Join(Environment.NewLine, plane.RenderMatrix()));
             File.WriteAllText("output.txt", string.Join(Environment.NewLine, plane.RenderMatrix()));
+            Console.ReadKey();
         }
     }
 }

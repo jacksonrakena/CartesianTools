@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CartesianTools
 {
-    public class CartesianPosition
+    public class CartesianPosition : ICartesianPosition
     {
         public int PositionX { get; }
         public int PositionY { get; }
@@ -13,6 +13,21 @@ namespace CartesianTools
         {
             PositionX = x;
             PositionY = y;
+        }
+
+        public int GetPositionX(CartesianPlane plane)
+        {
+            return PositionX;
+        }
+
+        public int GetPositionY(CartesianPlane plane)
+        {
+            return PositionY;
+        }
+
+        public (int, int) GetPositionXY(CartesianPlane plane)
+        {
+            return (PositionX, PositionY);
         }
 
         public static IEnumerable<CartesianPosition> CreateMap(int x, IEnumerable<int> y)
@@ -37,11 +52,20 @@ namespace CartesianTools
             return (from x0 in x from y0 in y select new CartesianPosition(x0, y0)).ToList();
         }
 
+        /// <summary>
+        ///     Creates a map of Cartesian points by resolving using an algebraic function. For each <code>x</code> position 
+        ///     (calculated from the width of the provided plane), a <code>y</code> position will be generated using <code>yResolve</code>.
+        /// </summary>
+        /// <param name="yResolve"></param>
+        /// <param name="plane"></param>
+        /// <returns></returns>
         public static IEnumerable<CartesianPosition> CreateFunction(Func<int, int> yResolve, CartesianPlane plane)
         {
             var xLimit = plane.Configuration.Width;
-            return (from x in Enumerable.Range(0, xLimit) 
-                let y = yResolve(x) where y <= plane.Configuration.Height select new CartesianPosition(x, y)).ToList();
+            return (from x in Enumerable.Range(0, xLimit)
+                    let y = yResolve(x)
+                    where y <= plane.Configuration.Height
+                    select new CartesianPosition(x, y)).ToList();
         }
 
         /// <summary>
@@ -49,7 +73,7 @@ namespace CartesianTools
         /// </summary>
         /// <param name="plane"></param>
         /// <returns></returns>
-        public static IEnumerable<CartesianPosition> CreateLine(CartesianPlane plane) => 
+        public static IEnumerable<CartesianPosition> CreateLine(CartesianPlane plane) =>
             CreateFunction(x => x, plane);
 
         /// <summary>
@@ -61,6 +85,6 @@ namespace CartesianTools
         /// <param name="plane"></param>
         /// <returns></returns>
         public static IEnumerable<CartesianPosition> CreateReverseLine(CartesianPlane plane) =>
-            CreateFunction(x => 0-x, plane);
+            CreateFunction(x => 0 - x, plane);
     }
 }
