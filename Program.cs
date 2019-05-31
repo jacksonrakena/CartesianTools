@@ -24,8 +24,8 @@ namespace CartesianTools
             });
 
             plane.InsertPositions(CartesianPosition.CreateFunction(x => x^2, plane));
-            Console.WriteLine(string.Join(Environment.NewLine, plane.RenderMatrix()));
-            File.WriteAllText("output.txt", string.Join(Environment.NewLine, plane.RenderMatrix()));
+            Console.WriteLine(string.Join(Environment.NewLine, plane.Render()));
+            File.WriteAllText("output.txt", string.Join(Environment.NewLine, plane.Render()));
             Console.ReadKey();
         }
     }

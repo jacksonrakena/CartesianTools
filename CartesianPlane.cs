@@ -10,6 +10,13 @@ namespace CartesianTools
         public CartesianPlane(CartesianConfiguration configuration)
         {
             Configuration = configuration;
+
+            if (Configuration.Renderer == null) throw new ArgumentNullException(nameof(Configuration),
+                "Configuration.Renderer is null.");
+
+            if (!Configuration.Renderer.CheckSpecifications(this)) throw new ArgumentException(
+                $"Configuration violates the specifications for {Configuration.Renderer.GetType().Name}.",
+                nameof(Configuration));
         }
         
         public CartesianConfiguration Configuration { get; }
@@ -39,9 +46,9 @@ namespace CartesianTools
             return _positions;
         }
         
-        public RenderedMap RenderMatrix(ICartesianRenderer customRenderer = null)
+        public RenderedMap Render()
         {
-            return (customRenderer ?? Configuration.Renderer).Render(this);
+            return Configuration.Renderer.Render(this);
         }
     }
 }

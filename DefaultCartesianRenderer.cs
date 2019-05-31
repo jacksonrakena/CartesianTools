@@ -4,8 +4,21 @@ using System.Text;
 
 namespace CartesianTools
 {
-    public class DefaultCartesianRenderer: ICartesianRenderer
+    public class DefaultCartesianRenderer : ICartesianRenderer
     {
+        public readonly static RendererSpecifications Specifications = new RendererSpecifications(100, 100);
+
+        public bool CheckSpecifications(CartesianPlane plane)
+        {
+            return !(plane.Configuration.Width > Specifications.MaxMapWidth
+                || plane.Configuration.Height > Specifications.MaxMapHeight);
+        }
+
+        public RendererSpecifications GetSpecifications()
+        {
+            return Specifications;
+        }
+
         public RenderedMap Render(CartesianPlane plane)
         {
             var rows = new List<string>();
