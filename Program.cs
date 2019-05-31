@@ -19,8 +19,7 @@ namespace CartesianTools
             var plane = new CartesianPlane(new CartesianConfiguration
             {
                 Height = 10,
-                Width = 10,
-                Renderer = new DefaultCartesianRenderer()
+                Width = 10
             });
 
             plane.InsertPositions(CartesianPosition.CreateFunction(x => x^2, plane));

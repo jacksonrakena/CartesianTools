@@ -12,6 +12,8 @@ namespace CartesianTools
         public readonly static int MaxMapWidth = 100;
         public readonly static int MaxMapHeight = 100;
 
+        public readonly static DefaultCartesianRenderer Instance = new DefaultCartesianRenderer();
+
         /// <inheritdoc />
         public bool CanRenderPlane(CartesianPlane plane)
         {

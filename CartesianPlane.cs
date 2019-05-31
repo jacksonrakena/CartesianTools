@@ -11,9 +11,6 @@ namespace CartesianTools
         {
             Configuration = configuration;
 
-            if (Configuration.Renderer == null) throw new ArgumentNullException("Configuration.Renderer",
-                "Configuration.Renderer is null.");
-
             if (!Configuration.Renderer.CanRenderPlane(this)) throw new ArgumentException(
                 $"Configuration violates the specifications for {Configuration.Renderer.GetType().Name}.",
                 nameof(Configuration));
