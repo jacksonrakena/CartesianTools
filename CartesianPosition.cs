@@ -30,12 +30,12 @@ namespace CartesianTools
             return (PositionX, PositionY);
         }
 
-        public static IEnumerable<CartesianPosition> CreateMap(int x, IEnumerable<int> y)
+        public static IEnumerable<ICartesianPosition> CreateMap(int x, IEnumerable<int> y)
         {
             return y.Select(ypos => new CartesianPosition(x, ypos)).ToList();
         }
 
-        public static IEnumerable<CartesianPosition> CreateMap(IEnumerable<int> x, int y)
+        public static IEnumerable<ICartesianPosition> CreateMap(IEnumerable<int> x, int y)
         {
             return x.Select(xpos => new CartesianPosition(xpos, y));
         }
@@ -47,7 +47,7 @@ namespace CartesianTools
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public static IEnumerable<CartesianPosition> CreateMap(IEnumerable<int> x, IEnumerable<int> y)
+        public static IEnumerable<ICartesianPosition> CreateMap(IEnumerable<int> x, IEnumerable<int> y)
         {
             return (from x0 in x from y0 in y select new CartesianPosition(x0, y0)).ToList();
         }
@@ -59,7 +59,7 @@ namespace CartesianTools
         /// <param name="yResolve"></param>
         /// <param name="plane"></param>
         /// <returns></returns>
-        public static IEnumerable<CartesianPosition> CreateFunction(Func<int, int> yResolve, CartesianPlane plane)
+        public static IEnumerable<ICartesianPosition> CreateFunction(Func<int, int> yResolve, CartesianPlane plane)
         {
             var xLimit = plane.Configuration.Width;
             return (from x in Enumerable.Range(0, xLimit)
@@ -73,7 +73,7 @@ namespace CartesianTools
         /// </summary>
         /// <param name="plane"></param>
         /// <returns></returns>
-        public static IEnumerable<CartesianPosition> CreateLine(CartesianPlane plane) =>
+        public static IEnumerable<ICartesianPosition> CreateLine(CartesianPlane plane) =>
             CreateFunction(x => x, plane);
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace CartesianTools
         /// </summary>
         /// <param name="plane"></param>
         /// <returns></returns>
-        public static IEnumerable<CartesianPosition> CreateReverseLine(CartesianPlane plane) =>
+        public static IEnumerable<ICartesianPosition> CreateReverseLine(CartesianPlane plane) =>
             CreateFunction(x => 0 - x, plane);
     }
 }

@@ -21,17 +21,18 @@ namespace CartesianTools
         
         public CartesianConfiguration Configuration { get; }
         
-        private readonly List<CartesianPosition> _positions = new List<CartesianPosition>();
+        private readonly List<ICartesianPosition> _positions = new List<ICartesianPosition>();
 
-        public CartesianPlane InsertPosition(CartesianPosition position)
+        public CartesianPlane InsertPosition(ICartesianPosition position)
         {
-            if (position.PositionX > Configuration.Width) throw new InvalidOperationException($"The provided Cartesian X position, {position.PositionX}, is bigger than the width of the Cartesian plane, {Configuration.Width}.");
-            if (position.PositionY > Configuration.Height) throw new InvalidOperationException($"The provided Cartesian Y position, {position.PositionY}, is bigger than the height of the Cartesian plane, {Configuration.Height}.");
+            var (x, y) = position.GetPositionXY(this);
+            if (x > Configuration.Width) throw new InvalidOperationException($"The provided Cartesian X position, {x}, is bigger than the width of the Cartesian plane, {Configuration.Width}.");
+            if (y > Configuration.Height) throw new InvalidOperationException($"The provided Cartesian Y position, {y}, is bigger than the height of the Cartesian plane, {Configuration.Height}.");
             _positions.Add(position);
             return this;
         }
 
-        public CartesianPlane InsertPositions(IEnumerable<CartesianPosition> positions)
+        public CartesianPlane InsertPositions(IEnumerable<ICartesianPosition> positions)
         {
             foreach (var position in positions)
             {
@@ -41,7 +42,7 @@ namespace CartesianTools
             return this;
         }
 
-        public IEnumerable<CartesianPosition> GetPositions()
+        public IEnumerable<ICartesianPosition> GetPositions()
         {
             return _positions;
         }
