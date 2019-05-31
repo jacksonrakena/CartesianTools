@@ -26,8 +26,8 @@ namespace CartesianTools
                 row.Append(plane.Configuration.Height - rowIndex - 1 + " ");
                 foreach (var rowPosition in Enumerable.Range(0, plane.Configuration.Width))
                 {
-                    var cart = positions.FirstOrDefault(p => p.PositionX == rowPosition && p.PositionY == plane.Configuration.Height - rowIndex - 1);
-                    row.Append(cart != null ? "+" : "-");
+                    var cart = positions.Any(p => p.PositionX == rowPosition && p.PositionY == plane.Configuration.Height - rowIndex - 1);
+                    row.Append(cart ? "+" : "-");
                 }
 
                 rows.Add(row.ToString());
