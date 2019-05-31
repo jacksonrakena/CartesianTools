@@ -4,17 +4,22 @@ using System.Text;
 
 namespace CartesianTools
 {
+    /// <summary>
+    ///     The default <see cref="ICartesianRenderer"/> for the CartesianTools library.
+    /// </summary>
     public class DefaultCartesianRenderer : ICartesianRenderer
     {
         public readonly static int MaxMapWidth = 100;
         public readonly static int MaxMapHeight = 100;
 
+        /// <inheritdoc />
         public bool CanRenderPlane(CartesianPlane plane)
         {
             return !(plane.Configuration.Width > MaxMapWidth
                 || plane.Configuration.Height > MaxMapHeight);
         }
 
+        /// <inheritdoc />
         public RenderedMap Render(CartesianPlane plane)
         {
             var rows = new List<string>();
