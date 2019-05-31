@@ -6,17 +6,13 @@ namespace CartesianTools
 {
     public class DefaultCartesianRenderer : ICartesianRenderer
     {
-        public readonly static RendererSpecifications Specifications = new RendererSpecifications(100, 100);
+        public readonly static int MaxMapWidth = 100;
+        public readonly static int MaxMapHeight = 100;
 
-        public bool CheckSpecifications(CartesianPlane plane)
+        public bool CanRenderPlane(CartesianPlane plane)
         {
-            return !(plane.Configuration.Width > Specifications.MaxMapWidth
-                || plane.Configuration.Height > Specifications.MaxMapHeight);
-        }
-
-        public RendererSpecifications GetSpecifications()
-        {
-            return Specifications;
+            return !(plane.Configuration.Width > MaxMapWidth
+                || plane.Configuration.Height > MaxMapHeight);
         }
 
         public RenderedMap Render(CartesianPlane plane)

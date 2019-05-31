@@ -2,8 +2,7 @@ namespace CartesianTools
 {
     public interface ICartesianRenderer
     {
-        RendererSpecifications GetSpecifications();
-        bool CheckSpecifications(CartesianPlane plane);
+        bool CanRenderPlane(CartesianPlane plane);
         RenderedMap Render(CartesianPlane plane);
     }
 }
