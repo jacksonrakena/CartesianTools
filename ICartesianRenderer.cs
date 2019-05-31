@@ -2,6 +2,6 @@ namespace CartesianTools
 {
     public interface ICartesianRenderer
     {
-        string[] Render(CartesianPlane plane);
+        RenderedMap Render(CartesianPlane plane);
     }
 }

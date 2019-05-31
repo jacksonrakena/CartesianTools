@@ -6,7 +6,7 @@ namespace CartesianTools
 {
     public class DefaultCartesianRenderer: ICartesianRenderer
     {
-        public string[] Render(CartesianPlane plane)
+        public RenderedMap Render(CartesianPlane plane)
         {
             var rows = new List<string>();
             
@@ -25,7 +25,7 @@ namespace CartesianTools
             }
             rows.Add("YX" + string.Join("", Enumerable.Range(0, plane.Configuration.Width)));
 
-            return rows.ToArray();
+            return new RenderedMap(rows);
         }
     }
 }

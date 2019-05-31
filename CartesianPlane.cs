@@ -39,9 +39,9 @@ namespace CartesianTools
             return _positions;
         }
         
-        public string[] RenderMatrix()
+        public RenderedMap RenderMatrix(ICartesianRenderer customRenderer = null)
         {
-            return Configuration.Renderer.Render(this);
+            return (customRenderer ?? Configuration.Renderer).Render(this);
         }
     }
 }
